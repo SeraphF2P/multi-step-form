@@ -1,91 +1,67 @@
-import Image from 'next/image'
-import { Inter } from 'next/font/google'
-import styles from './page.module.css'
+import { Ubuntu } from "next/font/google";
+import axios from "axios";
 
-const inter = Inter({ subsets: ['latin'] })
+import FormData from "../context/FormData";
+import FormStep1 from "./FormStep1";
+import FormStep2 from "./FormStep2";
+import Image from "next/image";
+import FormStep3 from "./FormStep3";
+import Confirm from "./Confirm";
+import ThankYou from "./ThankYou";
+import Steps from "./Steps";
+import TheTostifier from "./TheTostifier";
+import SlideInDiv from "./SlideInDiv";
 
-export default function Home() {
+const ubuntu = Ubuntu({
+  subsets: ["latin"],
+  weight: ["400", "500", "700"],
+  variable: "--font-ubuntu",
+});
+export default async function Home() {
+  const plans = await axios.get("/api/plans");
+  const addOns = await axios.get("/api/add-ons");
+  const formsSteps = [
+    <FormStep1 />,
+    <FormStep2 plans={plans.data} />,
+    <FormStep3 addOns={addOns.data} />,
+    <Confirm plans={plans.data} addOns={addOns.data} />,
+    <ThankYou />,
+  ];
   return (
-    <main className={styles.main}>
-      <div className={styles.description}>
-        <p>
-          Get started by editing&nbsp;
-          <code className={styles.code}>app/page.tsx</code>
-        </p>
-        <div>
-          <a
-            href="https://vercel.com?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            By{' '}
-            <Image
-              src="/vercel.svg"
-              alt="Vercel Logo"
-              className={styles.vercelLogo}
-              width={100}
-              height={24}
-              priority
-            />
-          </a>
-        </div>
-      </div>
-
-      <div className={styles.center}>
+    <main
+      className={` ${ubuntu.variable} font-ubuntu relative h-screen   w-full items-center justify-center bg-neutral-LightGray md:flex`}
+    >
+      <TheTostifier />
+      <section className=" relative z-10 grid h-full w-full  max-w-screen-md overflow-hidden md:m-auto md:flex md:h-[500px] md:items-center md:gap-4  md:rounded md:bg-neutral-white md:p-4  ">
         <Image
-          className={styles.logo}
-          src="/next.svg"
-          alt="Next.js Logo"
-          width={180}
-          height={37}
+          className=" absolute top-0 left-0 -z-10 w-full [aspect-ratio:375/172;]  md:hidden "
+          src={"/bg-sidebar-mobile.svg"}
+          width={375}
+          height={172}
+          alt="background image"
           priority
         />
-        <div className={styles.thirteen}>
-          <Image src="/thirteen.svg" alt="13" width={40} height={31} priority />
+        <div className="relative hidden h-full w-1/3 md:flex  ">
+          <Image
+            className=" absolute top-0 left-0 -z-10   h-full w-full  "
+            src={"/bg-sidebar-desktop.svg"}
+            width={172}
+            height={375}
+            alt="background image"
+            priority
+          />
         </div>
-      </div>
-
-      <div className={styles.grid}>
-        <a
-          href="https://beta.nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-          className={styles.card}
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <h2 className={inter.className}>
-            Docs <span>-&gt;</span>
-          </h2>
-          <p className={inter.className}>
-            Find in-depth information about Next.js features and API.
-          </p>
-        </a>
-
-        <a
-          href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-          className={styles.card}
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <h2 className={inter.className}>
-            Templates <span>-&gt;</span>
-          </h2>
-          <p className={inter.className}>Explore the Next.js 13 playground.</p>
-        </a>
-
-        <a
-          href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-          className={styles.card}
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <h2 className={inter.className}>
-            Deploy <span>-&gt;</span>
-          </h2>
-          <p className={inter.className}>
-            Instantly deploy your Next.js site to a shareable URL with Vercel.
-          </p>
-        </a>
-      </div>
+        <div className=" top-0 right-0 h-full   md:w-2/3">
+          <FormData
+            formsSteps={formsSteps.map((step, index) => {
+              return <SlideInDiv key={index}>{step}</SlideInDiv>;
+            })}
+          >
+            <Steps numOfSteps={4} />
+            <div className="fixed bottom-0 left-0 h-20 w-full bg-neutral-white md:hidden"></div>
+          </FormData>
+        </div>
+      </section>
     </main>
-  )
+  );
 }
