@@ -18,8 +18,12 @@ const ubuntu = Ubuntu({
   variable: "--font-ubuntu",
 });
 export default async function Home() {
-  const plans = await axios.get("http://localhost:3000/api/plans");
-  const addOns = await axios.get("http://localhost:3000/api/add-ons");
+  const plans = await axios.get(
+    "https://vercel.com/seraphf2p/multi-step-form-oqqb/7ySyCRSo2bQ2N8Wjw2NbELJRSUSd/api/plans"
+  );
+  const addOns = await axios.get(
+    "https://vercel.com/seraphf2p/multi-step-form-oqqb/7ySyCRSo2bQ2N8Wjw2NbELJRSUSd/api/add-ons"
+  );
   const formsSteps = [
     <FormStep1 />,
     <FormStep2 plans={plans.data} />,
