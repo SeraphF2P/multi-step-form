@@ -19,10 +19,10 @@ const ubuntu = Ubuntu({
 });
 export default async function Home() {
   const plans = await axios.get(
-    "https://vercel.com/seraphf2p/multi-step-form-oqqb/7ySyCRSo2bQ2N8Wjw2NbELJRSUSd/api/plans"
+    "https://vercel.com/seraphf2p/multi-step-form/api/plans"
   );
   const addOns = await axios.get(
-    "https://vercel.com/seraphf2p/multi-step-form-oqqb/7ySyCRSo2bQ2N8Wjw2NbELJRSUSd/api/add-ons"
+    "https://vercel.com/seraphf2p/multi-step-form/api/add-ons"
   );
   const formsSteps = [
     <FormStep1 />,
