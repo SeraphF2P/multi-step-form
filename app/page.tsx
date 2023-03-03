@@ -18,8 +18,8 @@ const ubuntu = Ubuntu({
   variable: "--font-ubuntu",
 });
 export default async function Home() {
-  const plans = await axios.get("/api/plans");
-  const addOns = await axios.get("/api/add-ons");
+  const plans = await axios.get("http://localhost:3000/api/plans");
+  const addOns = await axios.get("http://localhost:3000/api/add-ons");
   const formsSteps = [
     <FormStep1 />,
     <FormStep2 plans={plans.data} />,
@@ -29,7 +29,7 @@ export default async function Home() {
   ];
   return (
     <main
-      className={` ${ubuntu.variable} font-ubuntu relative h-screen   w-full items-center justify-center bg-neutral-LightGray md:flex`}
+      className={` ${ubuntu.variable} relative h-screen w-full   items-center justify-center bg-neutral-LightGray font-ubuntu md:flex`}
     >
       <TheTostifier />
       <section className=" relative z-10 grid h-full w-full  max-w-screen-md overflow-hidden md:m-auto md:flex md:h-[500px] md:items-center md:gap-4  md:rounded md:bg-neutral-white md:p-4  ">
