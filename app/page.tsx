@@ -55,7 +55,7 @@ export default async function Home() {
             priority
           />
         </div>
-        <div className=" top-0 right-0 h-full   md:w-2/3">
+        <div className=" top-0 right-0 h-full overflow-hidden   md:w-2/3">
           <FormData
             formsSteps={formsSteps.map((step, index) => {
               return <SlideInDiv key={index}>{step}</SlideInDiv>;

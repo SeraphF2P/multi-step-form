@@ -19,7 +19,7 @@ export default ({ plans, addOns }: { plans: any; addOns: any }) => {
     }, 1000);
     // try {
     //   setSubmitting(true);
-    //   let res = await axios.post(`/api/confirm`, data);
+    //   let res = await axios.post(`https://multi-step-form-eok7-mtinhuwg4-seraphf2p.vercel.app/api/confirm`, data);
     //   if (res.status === 200) {
     //     if (res.data.success === 1) {
     //       toast.success(res.data.msg);

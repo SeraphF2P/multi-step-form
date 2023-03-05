@@ -38,9 +38,9 @@ export default forwardRef<
     ref
   ) => {
     const ele = useRef(null);
+    ref = ele;
     useEffect(() => {
       if (onToggle == undefined || ele.current == undefined) return;
-      ref = ele.current;
       const btnElement = ele.current as unknown as HTMLButtonElement;
       const classes = onToggle.split(" ").filter((item) => {
         return item != "";
@@ -79,13 +79,13 @@ export default forwardRef<
         className={`
        ${
          shape == "filled"
-           ? " bg-light-primary hover:bg-light-hover active:bg-light-active disabled:bg-light-muted disabled:text-muted shadow-inherit rounded-full shadow-sm active:shadow-inner"
+           ? " shadow-inherit rounded-full bg-primary-MarineBlue shadow-sm hover:bg-primary-MarineBlue/90 active:bg-primary-MarineBlue/90 active:shadow-inner disabled:bg-neutral-LightGray disabled:text-neutral-coolGray"
            : shape == "outlined"
-           ? " disabled:border-light-muted active:bg-light-active disabled:text-muted border-inherit shadow-inherit   rounded-full border-4 border-solid  shadow-sm  active:shadow-inner disabled:border-4  disabled:border-solid"
+           ? " border-inherit shadow-inherit rounded-full border-4 border-solid   shadow-sm active:bg-primary-MarineBlue/90 active:shadow-inner  disabled:border-4  disabled:border-solid disabled:border-neutral-LightGray  disabled:text-neutral-coolGray"
            : ""
        }
       ${className}
-                   duration-400  transition-transform hover:scale-105 active:scale-100 disabled:hover:scale-100
+                   duration-400  transition-transform hover:scale-105  focus:scale-105 active:scale-100 disabled:hover:scale-100
                     `}
         {...props}
       >
