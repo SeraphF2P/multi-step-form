@@ -3,7 +3,6 @@ import "./globals.css";
 export const metadata = {
   title: "multi step form",
   description: "front-end challange",
-  
 };
 
 export default function RootLayout({
